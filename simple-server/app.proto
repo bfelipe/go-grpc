@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package server;
+
+import "google/protobuf/timestamp.proto";
+
+enum ApplicationType {
+    WORKER=0;
+    API=1;
+    CRON=2;
+}
+
+message Team {
+    string name = 1;
+    repeated string members = 2;
+}
+
+message Application {
+    string name = 1;
+    int32 id = 2;
+    bool is_backend = 3;
+    ApplicationType type = 4;
+    Team team = 5;
+    optional google.protobuf.Timestamp created_at = 6;
+}
+
+message ApplicationName {
+    string name = 1;
+}
+
+service AppService {
+    rpc NewAPI(ApplicationName) returns (Application);
+}
+
+option go_package = "simple-server/pb";
