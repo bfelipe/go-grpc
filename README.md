@@ -49,3 +49,27 @@ Serializing and deserializing data using protocol buffers are faster than json, 
 grpc-gateway is a reverse-proxy for clients that can't communicate with grpc server directly, clients still implementing restful apis calls, while grpc converts its request to a grpc call
 
 #################################################
+
+Interface with grpc using grpcurl
+
+- List services
+
+    grpcurl --plaintext host:port list
+
+- List services endpoints
+
+    grpcurl --plaintext host:port list Service
+
+- Describe Service Method
+
+    grpcurl --plaintext host:port describe Service.Method
+
+- Describe Method Request or Response
+
+    grpcurl --plaintext host:port describe .Request
+
+    grpcurl --plaintext host:port describe .Response
+
+- Invoke Method passing json file as payload
+
+    grpcurl --plaintext host:port Service.Method -d @ < file.json
