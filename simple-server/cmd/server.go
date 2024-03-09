@@ -7,6 +7,7 @@ import (
 	"gitlab.com/bfelipe/go-grpc/simple-server/pb"
 	"gitlab.com/bfelipe/go-grpc/simple-server/service"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
@@ -19,6 +20,7 @@ func main() {
 	server := grpc.NewServer()
 	var helloService service.HelloService
 	pb.RegisterHelloServer(server, &helloService)
+	reflection.Register(server)
 
 	log.Printf("info: listening on %s", addr)
 	if err := server.Serve(l); err != nil {
