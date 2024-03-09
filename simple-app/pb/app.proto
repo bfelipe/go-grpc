@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package server;
+package pb;
 
 import "google/protobuf/timestamp.proto";
 
@@ -32,4 +32,4 @@ service AppService {
     rpc NewAPI(ApplicationName) returns (Application);
 }
 
-option go_package = "simple-server/pb";
+option go_package = "simple-app/pb";

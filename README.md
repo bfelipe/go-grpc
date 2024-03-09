@@ -49,4 +49,4 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
 Generate go files from .proto
 
 go:generate mkdir -p pb
-go:generate protoc --go_out=$GOPATH/src/project-name/pb --go_opt=$GOPATH/src/project-name/path-to-proto-file file.proto
+go:generate protoc --go_opt=paths=$GOPATH/src/project-name --go_out=$GOPATH/src/project-name/pb  --proto-path=$GOPATH/src/project-name/sub-path-to-proto-file
