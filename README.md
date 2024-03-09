@@ -12,17 +12,26 @@ Dict
     - grpc: remote procedure call (rpc) framework, that rely on defining a service method which by passing some arguments(input) it will execute some action. Like if you are executing a cli service through your terminal.
     - protobuff: interface description language IDL, the equivalent of a payload for common webservices like(json, xml)
 
-Installation proto generator code for golang
+Installation protobuf and grpc generator code for golang
 
     go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+    go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
-Generating structs based on .proto definition
+Generating protobuf based on .proto definition
 
-    protoc file.proto -I=$GOPATH/src/project-name --go_out=$GOPATH/src/project-name --proto-path=$GOPATH/src/project-name/sub-path-to-proto-file
+    protoc file.proto -I=$GOPATH/src/project-name --go_out=$GOPATH/src/project-name --proto_path=$GOPATH/src/project-name/sub-path-to-proto-file
 
     ex.
 
     protoc app.proto -I=$GOPATH/src/go-grpc --go_out=$GOPATH/src/go-grpc --proto_path=$GOPATH/src/go-grpc/simple-server
+
+Generating protobuf and grpc on .proto definition
+
+    protoc file.proto -I=$GOPATH/src/project-name --go_out=$GOPATH/src/project-name --go-grpc_out=$GOPATH/src/project-name --proto_path=$GOPATH/src/project-name/sub-path-to-proto-file
+
+    ex.
+
+    protoc server.proto -I=$GOPATH/src/go-grpc --go_out=$GOPATH/src/go-grpc --go-grpc_out=$GOPATH/src/go-grpc --proto_path=$GOPATH/src/go-grpc/simple-server/pb
 
 Dict
 
@@ -40,13 +49,3 @@ Serializing and deserializing data using protocol buffers are faster than json, 
 grpc-gateway is a reverse-proxy for clients that can't communicate with grpc server directly, clients still implementing restful apis calls, while grpc converts its request to a grpc call
 
 #################################################
-
-Go grpc tools
-
-go install google.golang.org/protobuf/cmd/protoc-gen-go
-go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
-
-Generate go files from .proto
-
-go:generate mkdir -p pb
-go:generate protoc --go_opt=paths=$GOPATH/src/project-name --go_out=$GOPATH/src/project-name/pb  --proto-path=$GOPATH/src/project-name/sub-path-to-proto-file
