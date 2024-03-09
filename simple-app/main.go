@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/bfelipe/go-grpc/simple-server/pb"
+	"gitlab.com/bfelipe/go-grpc/simple-app/pb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -21,8 +21,4 @@ func main() {
 	}
 
 	fmt.Printf("%s", app.String())
-}
-
-func grpcServer() {
-
 }
