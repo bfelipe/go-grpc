@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+message ScanningRequest {
+    string robot_id = 1;
+    int64 scanning_data = 2;
+}
+
+enum Result {
+    CLEAR=0;
+    ANOMALY=1;
+    UNKOWN=2;
+}
+
+message ScanningResponse {
+    Result result = 1;
+}
+
+service Scanner {
+    rpc Scan(stream ScanningRequest) returns (ScanningResponse);
+}
+
+option go_package = "simple-streamer/pb";
