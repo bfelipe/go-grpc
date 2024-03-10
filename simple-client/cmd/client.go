@@ -41,6 +41,7 @@ func main() {
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second*2)
 	defer cancel()
 	ctx = metadata.AppendToOutgoingContext(ctx, "api_key", "123")
+	// ctx = metadata.AppendToOutgoingContext(ctx, "Request-Id", "456")
 
 	res, err := client.Greeting(ctx, &req)
 	if err != nil {
