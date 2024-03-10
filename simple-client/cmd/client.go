@@ -9,6 +9,7 @@ import (
 	"gitlab.com/bfelipe/go-grpc/simple-server/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
 )
 
 func main() {
@@ -39,6 +40,7 @@ func main() {
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second*2)
 	defer cancel()
+	ctx = metadata.AppendToOutgoingContext(ctx, "api_key", "123")
 
 	res, err := client.Greeting(ctx, &req)
 	if err != nil {
