@@ -22,15 +22,19 @@ func main() {
 		log.Fatalf("Failed to listen %s", err)
 	}
 
-	server := grpc.NewServer(grpc.UnaryInterceptor(requestIdInterceptor))
-	var helloService service.HelloService
-	pb.RegisterHelloServer(server, &helloService)
-	reflection.Register(server)
-
+	server := newGrpcServer()
 	log.Printf("info: listening on %s", addr)
 	if err := server.Serve(l); err != nil {
 		log.Fatalf("Failed to serve %s", err)
 	}
+}
+
+func newGrpcServer() *grpc.Server {
+	server := grpc.NewServer(grpc.UnaryInterceptor(requestIdInterceptor))
+	var helloService service.HelloService
+	pb.RegisterHelloServer(server, &helloService)
+	reflection.Register(server)
+	return server
 }
 
 func requestIdInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
