@@ -60,11 +60,11 @@ Interface with grpc using grpcurl
 
 - List services endpoints
 
-    grpcurl --plaintext host:port list Service
+    grpcurl --plaintext host:port list .Service
 
 - Describe Service Method
 
-    grpcurl --plaintext host:port describe Service.Method
+    grpcurl --plaintext host:port describe .Service.Method
 
 - Describe Method Request or Response
 
@@ -74,4 +74,20 @@ Interface with grpc using grpcurl
 
 - Invoke Method passing json file as payload
 
-    grpcurl --plaintext host:port Service.Method -d @ < file.json
+    grpcurl --plaintext host:port .Service.Method -d @ < file.json
+
+    ex.
+
+    grpcurl \
+    -plaintext \
+    -d '{"message": "Hello", "subject": "Mr. Hands"}' -H "Content-Type: application/json" \
+    -H "api_key: 123" \
+    localhost:3000 pb.Hello/Greeting
+
+
+    curl \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"message": "Hello", "subject": "Mr. Hands"}' \
+    -H "api_key: 123" \
+    http://localhost:8080/v1/hello/greeting
