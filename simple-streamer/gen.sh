@@ -1,3 +1,7 @@
 #!/bin/bash
 
-protoc $1 -I=$GOPATH/src/go-grpc --go_out=$GOPATH/src/go-grpc --go-grpc_out=$GOPATH/src/go-grpc --proto_path=$GOPATH/src/go-grpc/simple-streamer/pb
+BASE_PATH=$GOPATH/src/go-grpc
+
+protoc $1 -I=$BASE_PATH \
+ --go_out=$BASE_PATH \
+ --proto_path=$BASE_PATH/simple-streamer/pb
